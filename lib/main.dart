@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
   final String title;
 
   @override
@@ -28,7 +27,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   String _lastSelected = 'TAB: 0';
-
   void _selectedTab(int index) {
     setState(() {
       _lastSelected = 'TAB: $index';
@@ -59,10 +57,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         notchedShape: CircularNotchedRectangle(),
         onTabSelected: _selectedTab,
         items: [
-          FABBottomAppBarItem(text: 'Home'),
-          FABBottomAppBarItem(text: 'History'),
-          FABBottomAppBarItem(text: 'Features'),
-          FABBottomAppBarItem(text: 'Profile'),
+          FABBottomAppBarItem(text: 'Request cash'),
+          FABBottomAppBarItem(text: 'Pay cash'),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
