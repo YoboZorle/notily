@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'src/widgets/layout.dart';
 import 'src/widgets/fab_bottom_app_bar.dart';
-import 'src/widgets/fab_with_icons.dart';
 
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Note Klynox',
       theme: new ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or press Run > Flutter Hot Reload in IntelliJ). Notice that the
-        // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'BottomAppBar with FAB'),
+      home: new MyHomePage(title: 'Notily'),
     );
   }
 }
@@ -46,17 +35,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     });
   }
 
-  void _selectedFab(int index) {
-    setState(() {
-      _lastSelected = 'FAB: $index';
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title,
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800)),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
       ),
       body: Center(
         child: Text(
@@ -65,42 +53,23 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ),
       ),
       bottomNavigationBar: FABBottomAppBar(
-        centerItemText: 'A',
         color: Colors.grey,
-        selectedColor: Colors.red,
+        selectedColor: Colors.lightBlue,
+        backgroundColor: Colors.white,
         notchedShape: CircularNotchedRectangle(),
         onTabSelected: _selectedTab,
         items: [
-          FABBottomAppBarItem(iconData: Icons.menu, text: 'This'),
-          FABBottomAppBarItem(iconData: Icons.layers, text: 'Is'),
-          FABBottomAppBarItem(iconData: Icons.dashboard, text: 'Bottom'),
-          FABBottomAppBarItem(iconData: Icons.info, text: 'Bar'),
+          FABBottomAppBarItem(text: 'Home'),
+          FABBottomAppBarItem(text: 'History'),
+          FABBottomAppBarItem(text: 'Features'),
+          FABBottomAppBarItem(text: 'Profile'),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: _buildFab(
-          context), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-
-  Widget _buildFab(BuildContext context) {
-    final icons = [ Icons.sms, Icons.mail, Icons.phone ];
-    return AnchoredOverlay(
-      showOverlay: true,
-      overlayBuilder: (context, offset) {
-        return CenterAbout(
-          position: Offset(offset.dx, offset.dy - icons.length * 35.0),
-          child: FabWithIcons(
-            icons: icons,
-            onIconTapped: _selectedFab,
-          ),
-        );
-      },
-      child: FloatingActionButton(
-        onPressed: () { },
-        tooltip: 'Increment',
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.lightBlue,
+        onPressed: () {},
         child: Icon(Icons.add),
-        elevation: 2.0,
       ),
     );
   }
