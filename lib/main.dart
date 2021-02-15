@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:notily/src/screens/browse.dart';
 import 'package:notily/src/screens/home.dart';
 
-void main() => runApp(new MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
