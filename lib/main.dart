@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:notily/src/helpers/constants.dart';
 import 'package:notily/src/screens/browse.dart';
 import 'package:notily/src/screens/home.dart';
 
@@ -16,9 +17,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Bottom Navigation',
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
-        primaryColor: const Color(0xFF02BB9F),
-        primaryColorDark: const Color(0xFF167F67),
-        accentColor: const Color(0xFFFFAD32),
+        primaryColor: AppColor.appBg,
+        primaryColorDark: AppColor.appBg,
+        accentColor: AppColor.appColor,
       ),
       home: new DashboardScreen(title: 'Bottom Navigation'),
     );
@@ -52,7 +53,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   void navigationTapped(int page) {
     _pageController.animateToPage(page,
-        duration: const Duration(milliseconds: 300), curve: Curves.ease);
+        duration: const Duration(milliseconds: 200), curve: Curves.easeOut);
   }
 
   void onPageChanged(int page) {
@@ -65,6 +66,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new PageView(
+        physics: NeverScrollableScrollPhysics(),
         children: [
           new Home(),
           new Browse(),
@@ -74,31 +76,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       bottomNavigationBar: new Theme(
         data: Theme.of(context).copyWith(
-          // sets the background color of the `BottomNavigationBar`
-          canvasColor: const Color(0xFF167F67),
-        ), // sets the inactive color of the `BottomNavigationBar`
+            canvasColor: AppColor.appBg, unselectedWidgetColor: Colors.grey),
         child: new BottomNavigationBar(
+          selectedItemColor: AppColor.appBlack,
+          unselectedItemColor: Colors.grey[400],
+          backgroundColor: AppColor.appBg,
+          elevation: 0,
           items: [
             new BottomNavigationBarItem(
                 icon: new Icon(
-                  Icons.home,
-                  color: const Color(0xFFFFFFFF),
+                  Icons.home_filled,
                 ),
                 title: new Text(
                   "Home",
-                  style: new TextStyle(
-                    color: const Color(0xFFFFFFFF),
+                  style: TextStyle(
+                    fontSize: 11,
                   ),
                 )),
             new BottomNavigationBarItem(
                 icon: new Icon(
-                  Icons.location_on,
-                  color: const Color(0xFFFFFFFF),
+                  Icons.widgets_rounded,
                 ),
                 title: new Text(
-                  "Location",
-                  style: new TextStyle(
-                    color: const Color(0xFFFFFFFF),
+                  "Browse",
+                  style: TextStyle(
+                    fontSize: 11,
                   ),
                 )),
           ],
@@ -109,7 +111,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         elevation: 12,
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: AppColor.appColor,
         onPressed: () {
           print('fish ');
         },
