@@ -56,7 +56,8 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     items.insert(items.length >> 1, _buildMiddleTabItem());
 
     return BottomAppBar(
-      shape: widget.notchedShape,elevation: 0,
+      shape: widget.notchedShape,
+      elevation: 0,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -102,10 +103,12 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // Icon(item.iconData, color: color, size: widget.iconSize),
+                Icon(item.iconData, color: color, size: widget.iconSize),
+                SizedBox(height: 6),
                 Text(
                   item.text,
-                  style: TextStyle(color: color, fontWeight: FontWeight.w500, fontSize: 15),
+                  style: TextStyle(
+                      color: color, fontWeight: FontWeight.w500, fontSize: 11),
                 )
               ],
             ),

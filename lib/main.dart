@@ -51,14 +51,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ),
       ),
       bottomNavigationBar: FABBottomAppBar(
-        color: Colors.grey,
-        selectedColor: Colors.lightBlue,
+        color: Colors.grey[400],
+        selectedColor: Colors.black,
         backgroundColor: Colors.white,
         notchedShape: CircularNotchedRectangle(),
         onTabSelected: _selectedTab,
         items: [
-          FABBottomAppBarItem(text: 'Request cash'),
-          FABBottomAppBarItem(text: 'Pay cash'),
+          FABBottomAppBarItem(text: 'Request cash', iconData: Icons.account_balance_wallet_rounded),
+          FABBottomAppBarItem(text: 'Pay cash', iconData: Icons.account_balance),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
