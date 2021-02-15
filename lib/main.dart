@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'src/widgets/fab_bottom_app_bar.dart';
 
 void main() => runApp(new MyApp());
@@ -11,6 +10,7 @@ class MyApp extends StatelessWidget {
       title: 'Note Klynox',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
+        brightness: Brightness.light,
       ),
       home: new MyHomePage(title: 'Notily'),
     );
@@ -57,12 +57,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         notchedShape: CircularNotchedRectangle(),
         onTabSelected: _selectedTab,
         items: [
-          FABBottomAppBarItem(text: 'Request cash', iconData: Icons.account_balance_wallet_rounded),
-          FABBottomAppBarItem(text: 'Pay cash', iconData: Icons.account_balance),
+          FABBottomAppBarItem(text: 'Home', iconData: Icons.home_filled),
+          FABBottomAppBarItem(text: 'Browse', iconData: Icons.widgets_rounded),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
+        elevation: 12,
         backgroundColor: Colors.lightBlue,
         onPressed: () {},
         child: Icon(Icons.add),
