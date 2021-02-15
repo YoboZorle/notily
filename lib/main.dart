@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'src/widgets/fab_bottom_app_bar.dart';
+import 'package:notily/src/screens/browse.dart';
+import 'package:notily/src/screens/home.dart';
 
 void main() => runApp(new MyApp());
 
@@ -7,66 +8,107 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Note Klynox',
+      title: 'Flutter Bottom Navigation',
+      debugShowCheckedModeBanner: false,
       theme: new ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.light,
+        primaryColor: const Color(0xFF02BB9F),
+        primaryColorDark: const Color(0xFF167F67),
+        accentColor: const Color(0xFFFFAD32),
       ),
-      home: new MyHomePage(title: 'Notily'),
+      home: new DashboardScreen(title: 'Bottom Navigation'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class DashboardScreen extends StatefulWidget {
+  DashboardScreen({Key key, this.title}) : super(key: key);
+
   final String title;
 
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _DashboardScreenState createState() => new _DashboardScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  String _lastSelected = 'TAB: 0';
-  void _selectedTab(int index) {
+class _DashboardScreenState extends State<DashboardScreen> {
+  PageController _pageController;
+  int _page = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = new PageController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
+
+  void navigationTapped(int page) {
+    _pageController.animateToPage(page,
+        duration: const Duration(milliseconds: 300), curve: Curves.ease);
+  }
+
+  void onPageChanged(int page) {
     setState(() {
-      _lastSelected = 'TAB: $index';
+      this._page = page;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(widget.title,
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800)),
-        elevation: 0,
-        backgroundColor: Colors.white,
-        brightness: Brightness.light,
-      ),
-      body: Center(
-        child: Text(
-          _lastSelected,
-          style: TextStyle(fontSize: 32.0),
-        ),
-      ),
-      bottomNavigationBar: FABBottomAppBar(
-        color: Colors.grey[400],
-        selectedColor: Colors.black,
-        backgroundColor: Colors.white,
-        notchedShape: CircularNotchedRectangle(),
-        onTabSelected: _selectedTab,
-        items: [
-          FABBottomAppBarItem(text: 'Home', iconData: Icons.home_filled),
-          FABBottomAppBarItem(text: 'Browse', iconData: Icons.widgets_rounded),
+    return new Scaffold(
+      body: new PageView(
+        children: [
+          new Home(),
+          new Browse(),
         ],
+        onPageChanged: onPageChanged,
+        controller: _pageController,
+      ),
+      bottomNavigationBar: new Theme(
+        data: Theme.of(context).copyWith(
+          // sets the background color of the `BottomNavigationBar`
+          canvasColor: const Color(0xFF167F67),
+        ), // sets the inactive color of the `BottomNavigationBar`
+        child: new BottomNavigationBar(
+          items: [
+            new BottomNavigationBarItem(
+                icon: new Icon(
+                  Icons.home,
+                  color: const Color(0xFFFFFFFF),
+                ),
+                title: new Text(
+                  "Home",
+                  style: new TextStyle(
+                    color: const Color(0xFFFFFFFF),
+                  ),
+                )),
+            new BottomNavigationBarItem(
+                icon: new Icon(
+                  Icons.location_on,
+                  color: const Color(0xFFFFFFFF),
+                ),
+                title: new Text(
+                  "Location",
+                  style: new TextStyle(
+                    color: const Color(0xFFFFFFFF),
+                  ),
+                )),
+          ],
+          onTap: navigationTapped,
+          currentIndex: _page,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         elevation: 12,
         backgroundColor: Colors.lightBlue,
-        onPressed: () {},
-        child: Icon(Icons.add),
+        onPressed: () {
+          print('fish ');
+        },
+        child: Icon(Icons.qr_code_rounded, color: Colors.white),
       ),
     );
   }
