@@ -64,58 +64,61 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new PageView(
-        physics: NeverScrollableScrollPhysics(),
-        children: [
-          new Home(),
-          new Browse(),
-        ],
-        onPageChanged: onPageChanged,
-        controller: _pageController,
-      ),
-      bottomNavigationBar: new Theme(
-        data: Theme.of(context).copyWith(
-            canvasColor: AppColor.appBg, unselectedWidgetColor: Colors.grey),
-        child: new BottomNavigationBar(
-          selectedItemColor: AppColor.appBlack,
-          unselectedItemColor: Colors.grey[400],
-          backgroundColor: AppColor.appBg,
-          elevation: 0,
-          items: [
-            new BottomNavigationBarItem(
-                icon: new Icon(
-                  Icons.home_filled,
-                ),
-                title: new Text(
-                  "Home",
-                  style: TextStyle(
-                    fontSize: 11,
-                  ),
-                )),
-            new BottomNavigationBarItem(
-                icon: new Icon(
-                  Icons.widgets_rounded,
-                ),
-                title: new Text(
-                  "Browse",
-                  style: TextStyle(
-                    fontSize: 11,
-                  ),
-                )),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: new Scaffold(
+        body: new PageView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            new Home(),
+            new Browse(),
           ],
-          onTap: navigationTapped,
-          currentIndex: _page,
+          onPageChanged: onPageChanged,
+          controller: _pageController,
         ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        elevation: 12,
-        backgroundColor: AppColor.appColor,
-        onPressed: () {
-          print('fish ');
-        },
-        child: Icon(Icons.qr_code_rounded, color: Colors.white),
+        bottomNavigationBar: new Theme(
+          data: Theme.of(context).copyWith(
+              canvasColor: AppColor.appBg, unselectedWidgetColor: Colors.grey),
+          child: new BottomNavigationBar(
+            selectedItemColor: AppColor.appBlack,
+            unselectedItemColor: Colors.grey[400],
+            backgroundColor: AppColor.appBg,
+            elevation: 0,
+            items: [
+              new BottomNavigationBarItem(
+                  icon: new Icon(
+                    Icons.home_filled,
+                  ),
+                  title: new Text(
+                    "Home",
+                    style: TextStyle(
+                      fontSize: 11,
+                    ),
+                  )),
+              new BottomNavigationBarItem(
+                  icon: new Icon(
+                    Icons.widgets_rounded,
+                  ),
+                  title: new Text(
+                    "Browse",
+                    style: TextStyle(
+                      fontSize: 11,
+                    ),
+                  )),
+            ],
+            onTap: navigationTapped,
+            currentIndex: _page,
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          elevation: 12,
+          backgroundColor: AppColor.appColor,
+          onPressed: () {
+            print('fish ');
+          },
+          child: Icon(Icons.qr_code_rounded, color: Colors.white),
+        ),
       ),
     );
   }
